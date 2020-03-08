@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+
+## API Container
+  api:
+    container_name: api
+    build: ./api
+    volumes:
+      - './api:/usr/src/api'
+    ports:
+      - '4001:4000'
+    environment:
+      - NODE_ENV=development
+
+# UI Container
+  ui:
+    container_name: ui
+    build: 
+        context: ./ui
+        dockerfile: Dockerfile
+    volumes:
+    - './ui:/usr/src/ui/'
+    - '/usr/src/ui/node_modules'
+    ports:
+    - '3001:3000'
+    environment:
+    - NODE_ENV=development
